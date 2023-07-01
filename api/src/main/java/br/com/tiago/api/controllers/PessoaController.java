@@ -4,6 +4,7 @@ import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -34,4 +35,11 @@ public class PessoaController {
 		Pessoa atualizarPessoa = pessoaService.alterarPessoa(id, pessoa);
 		return ResponseEntity.ok().body(atualizarPessoa);
 	}
+	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> removePessoa(@PathVariable Long id) {
+		pessoaService.removePessoa(id);
+		return ResponseEntity.noContent().build();
+	}
+	
 }

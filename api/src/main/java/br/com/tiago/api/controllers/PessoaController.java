@@ -1,10 +1,14 @@
 package br.com.tiago.api.controllers;
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.tiago.api.models.Pessoa;
 import br.com.tiago.api.services.PessoaService;
@@ -17,7 +21,9 @@ public class PessoaController {
 	private PessoaService pessoaService;
 	
 	@PostMapping
-	public Pessoa adicionarPessoa(@RequestBody Pessoa pessoa) {
-		return pessoaService.adicionarPessoa(pessoa);
+	public ResponseEntity<Pessoa> adicionarPessoa(@RequestBody Pessoa pessoa) {
+		pessoa = pessoaService.adicionarPessoa(pessoa);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pessoa.getId()).toUri();
+		return ResponseEntity.created(uri).build();
 	}
 }

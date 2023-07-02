@@ -1,8 +1,7 @@
 package br.com.tiago.api.controllers;
 
-import java.net.URI;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.tiago.api.models.Pessoa;
 import br.com.tiago.api.services.PessoaService;
@@ -26,8 +24,7 @@ public class PessoaController {
 	@PostMapping
 	public ResponseEntity<Pessoa> adicionarPessoa(@RequestBody Pessoa pessoa) {
 		pessoa = pessoaService.adicionarPessoa(pessoa);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pessoa.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.status(HttpStatus.CREATED).body(pessoa);
 	}
 	
 	@PutMapping(value = "/{id}")

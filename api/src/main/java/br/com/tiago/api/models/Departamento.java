@@ -11,8 +11,12 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor 
+@NoArgsConstructor
 @Data
 @Entity
 public class Departamento implements Serializable {

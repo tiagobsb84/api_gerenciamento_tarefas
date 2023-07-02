@@ -33,5 +33,6 @@ public class Departamento implements Serializable {
 	private List<Pessoa> pessoa;
 	
 	@OneToMany(mappedBy = "departamento")
+	@JsonIgnore
 	private List<Tarefa> tarefa;
 }

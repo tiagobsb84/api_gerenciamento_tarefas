@@ -32,7 +32,6 @@ public class TarefaService {
 	@Transactional
 	public Tarefa AdicionarTarefa(TarefaDto tarefaDto) {
 		Optional<Departamento> verificandoDepartamento = departamentoRepository.findById(tarefaDto.getDepartamento_id());
-		Optional<Pessoa> buscandoPessoa = pessoaRepository.findById(tarefaDto.getPessoa_id());
 	
 		if(!verificandoDepartamento.isPresent()) {
 			throw new Error("Departamento não existe");
@@ -40,7 +39,6 @@ public class TarefaService {
 		
 		Tarefa tarefa = new Tarefa(tarefaDto.getTitulo(), tarefaDto.getDescricao(), tarefaDto.getPrazo(), tarefaDto.getDuracao(), tarefaDto.getFinalizado());
 		tarefa.setDepartamento(verificandoDepartamento.get());
-		tarefa.setPessoaAlocada(buscandoPessoa.get());
 		
 		return tarefaRepository.save(tarefa);
 	}
@@ -48,12 +46,11 @@ public class TarefaService {
 	@Transactional
 	public Tarefa AlocaUmaPessoaNaTarefa(Long id, Long pessoa_id) {
 		Optional<Tarefa> buscandoTarefa = tarefaRepository.findById(id);
-		Optional<Pessoa> buscandoPessoa = pessoaRepository.findById(pessoa_id);
-		
 		if(!buscandoTarefa.isPresent()) {
 			throw new Error("Tarefa não encontrada");
 		}
 		
+		Optional<Pessoa> buscandoPessoa = pessoaRepository.findById(pessoa_id);
 		if(!buscandoPessoa.isPresent()) {
 			throw new Error("Pessoa não encontrada");
 		}
@@ -64,6 +61,20 @@ public class TarefaService {
 		
 		Tarefa tarefa = buscandoTarefa.get();
 		tarefa.setPessoaAlocada(buscandoPessoa.get());
+		
+		return tarefaRepository.save(tarefa);
+	}
+	
+	@Transactional
+	public Tarefa finalizarTarefa(Long id) {
+		Optional<Tarefa> buscandoTarefa = tarefaRepository.findById(id);
+		
+		if(!buscandoTarefa.isPresent()) {
+			throw new Error("Tarefa não encontrada");
+		}
+		
+		Tarefa tarefa = buscandoTarefa.get();
+		tarefa.setFinalizado(true);
 		
 		return tarefaRepository.save(tarefa);
 	}

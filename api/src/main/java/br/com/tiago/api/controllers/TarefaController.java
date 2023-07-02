@@ -30,8 +30,12 @@ public class TarefaController {
 	}
 	
 	@PutMapping("/alocar/{id}")
-	public ResponseEntity<Tarefa> AlocaUmaPessoaNaTarefa(@PathVariable Long id, AlocarPessoaDto alocarPessoaDto) {
+	public ResponseEntity<Tarefa> AlocaUmaPessoaNaTarefa(@PathVariable("id") Long id, @RequestBody AlocarPessoaDto alocarPessoaDto) {
 		return ResponseEntity.status(HttpStatus.OK).body(tarefaService.AlocaUmaPessoaNaTarefa(id, alocarPessoaDto.getPessoa_id()));
 	}
 	
+	@PutMapping("/finalizar/{id}")
+	public ResponseEntity<Tarefa> finalizandoTarefa(@PathVariable("id") Long id) {
+		return ResponseEntity.status(HttpStatus.OK).body(tarefaService.finalizarTarefa(id));
+	}
 }

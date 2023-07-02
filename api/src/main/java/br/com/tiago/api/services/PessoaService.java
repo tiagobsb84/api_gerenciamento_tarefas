@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.tiago.api.dtos.BuscarPessoaHoras;
 import br.com.tiago.api.dtos.ListaPessoasDto;
 import br.com.tiago.api.dtos.PessoaDto;
 import br.com.tiago.api.models.Departamento;
@@ -69,4 +70,9 @@ public class PessoaService {
 		return pessoaRepository.buscarTodosDepartamentoComTotalDuracaoTarefa();
 	}
 	
+	
+	//Busca Pessoa pelo nome, periodo, media horas gastas
+	public List<BuscarPessoaHoras> buscarPessoasNome(String nome) {
+		return pessoaRepository.buscarPessoasMediaHoras(nome);
+	}
 }

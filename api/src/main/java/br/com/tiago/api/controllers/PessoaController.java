@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.tiago.api.dtos.BuscarPessoaHoras;
 import br.com.tiago.api.dtos.ListaPessoasDto;
 import br.com.tiago.api.dtos.PessoaDto;
 import br.com.tiago.api.models.Pessoa;
@@ -48,6 +50,11 @@ public class PessoaController {
 	@GetMapping
 	public ResponseEntity<List<ListaPessoasDto>> listaPessoasDepartamentoDuracao() {
 		return ResponseEntity.status(HttpStatus.OK).body(pessoaService.buscarTodos());
+	}
+	
+	@GetMapping("/gastos")
+	public ResponseEntity<List<BuscarPessoaHoras>> buscarPessoaNomeHorasGasta(@RequestParam String nome) {
+		return ResponseEntity.status(HttpStatus.OK).body(pessoaService.buscarPessoasNome(nome));
 	}
 	
 }

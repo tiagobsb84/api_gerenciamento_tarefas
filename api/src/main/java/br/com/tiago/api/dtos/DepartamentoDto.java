@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class DepartamentoDto {
 
 	@NotBlank
-	private String title;
+	private String nomeDepartamento;
 }

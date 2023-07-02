@@ -1,5 +1,6 @@
 package br.com.tiago.api.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -7,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.tiago.api.dtos.ListaPessoasDto;
 import br.com.tiago.api.dtos.PessoaDto;
 import br.com.tiago.api.models.Departamento;
 import br.com.tiago.api.models.Pessoa;
@@ -61,4 +63,10 @@ public class PessoaService {
 	public void removePessoa(Long id) {
 		pessoaRepository.deleteById(id);
 	}
+	
+	//Lista pessoa, departamento e total de horas
+	public List<ListaPessoasDto> buscarTodos() {
+		return pessoaRepository.buscarTodosDepartamentoComTotalDuracaoTarefa();
+	}
+	
 }

@@ -7,7 +7,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.tiago.api.dtos.PessoaDto;
+import br.com.tiago.api.models.Departamento;
 import br.com.tiago.api.models.Pessoa;
+import br.com.tiago.api.repositoreis.DepartamentoRepository;
 import br.com.tiago.api.repositoreis.PessoaRepository;
 import br.com.tiago.api.services.exceptions.NotFoundException;
 
@@ -17,9 +20,22 @@ public class PessoaService {
 	@Autowired
 	private PessoaRepository pessoaRepository;
 	
-	//Adicionar pessoa
+	@Autowired
+	private DepartamentoRepository departamentoRepository;
+	
 	@Transactional
-	public Pessoa adicionarPessoa(Pessoa pessoa) {
+	public Pessoa adicionarPessoa(PessoaDto pessoaDto) {
+		Optional<Departamento> departamentoPeloId = departamentoRepository.findById(pessoaDto.getDepartamento_id()); 
+		
+		if(!departamentoPeloId.isPresent()) {
+			throw new Error("Departamento não encontrado");
+		}
+		
+		Departamento departamento = departamentoPeloId.get();
+		
+		Pessoa pessoa = new Pessoa();
+		pessoa.setNome(pessoaDto.getNome());
+		pessoa.setDepartamento(departamento);
 		
 		return pessoaRepository.save(pessoa);
 	}

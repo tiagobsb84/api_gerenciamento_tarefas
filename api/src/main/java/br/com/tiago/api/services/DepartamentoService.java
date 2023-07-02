@@ -23,7 +23,7 @@ public class DepartamentoService {
 		Optional<Departamento> departamentoAparece = departamentoRepository.buscandoPorTitulo(departamento.getNomeDepartamento());
 		
 		if(departamentoAparece.isPresent()) {
-			throw new Error("Departamento não existe");
+			throw new Error("Departamento já existe");
 		}
 		
 		return departamentoRepository.save(departamento);

@@ -11,20 +11,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.tiago.api.dtos.PessoaDto;
 import br.com.tiago.api.models.Pessoa;
 import br.com.tiago.api.services.PessoaService;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/pessoas")
+@RequiredArgsConstructor
 public class PessoaController {
 
 	@Autowired
 	private PessoaService pessoaService;
 	
 	@PostMapping
-	public ResponseEntity<Pessoa> adicionarPessoa(@RequestBody Pessoa pessoa) {
-		pessoa = pessoaService.adicionarPessoa(pessoa);
-		return ResponseEntity.status(HttpStatus.CREATED).body(pessoa);
+	public ResponseEntity<Pessoa> adicionarPessoa(@RequestBody PessoaDto pessoaDto) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(pessoaService.adicionarPessoa(pessoaDto));
 	}
 	
 	@PutMapping(value = "/{id}")

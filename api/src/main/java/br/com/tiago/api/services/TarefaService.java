@@ -6,6 +6,9 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.tiago.api.dtos.TarefaDto;
@@ -80,7 +83,8 @@ public class TarefaService {
 		return tarefaRepository.save(tarefa);
 	}
 	
-	public List<Tarefa> buscarPorTresTarefaPrazoAntigo() {
-		return tarefaRepository.buscarPorTresTarefaPrazoAntigos();
+	public List<Tarefa> buscarTarefaPrazoAntigo() {
+		Pageable pageable = PageRequest.of(0, 3, Sort.by("prazo").ascending());
+		return tarefaRepository.buscarPorTresTarefaPrazoAntigos(pageable);
 	}
 }

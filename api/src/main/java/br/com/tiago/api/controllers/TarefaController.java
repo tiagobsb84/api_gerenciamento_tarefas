@@ -42,8 +42,8 @@ public class TarefaController {
 		return ResponseEntity.status(HttpStatus.OK).body(tarefaService.finalizarTarefa(id));
 	}
 	
-	@GetMapping("/prazos")
+	@GetMapping("/antigo")
 	public ResponseEntity<List<Tarefa>> buscarPorTresTarefasPrazoAntigos() {
-		return ResponseEntity.status(HttpStatus.OK).body(tarefaService.buscarPorTresTarefaPrazoAntigo());
+		return ResponseEntity.status(HttpStatus.OK).body(tarefaService.buscarTarefaPrazoAntigo());
 	}
 }

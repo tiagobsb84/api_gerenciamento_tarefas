@@ -1,5 +1,6 @@
 package br.com.tiago.api.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -60,7 +61,7 @@ public class TarefaService {
 		}
 		
 		Tarefa tarefa = buscandoTarefa.get();
-		tarefa.setPessoaAlocada(buscandoPessoa.get());
+		tarefa.setPessoa(buscandoPessoa.get());
 		
 		return tarefaRepository.save(tarefa);
 	}
@@ -77,5 +78,9 @@ public class TarefaService {
 		tarefa.setFinalizado(true);
 		
 		return tarefaRepository.save(tarefa);
+	}
+	
+	public List<Tarefa> buscarPorTresTarefaPrazoAntigo() {
+		return tarefaRepository.buscarPorTresTarefaPrazoAntigos();
 	}
 }

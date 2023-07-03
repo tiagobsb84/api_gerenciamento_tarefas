@@ -40,7 +40,7 @@ public class Pessoa implements Serializable {
 	@JoinColumn(name = "departamento_id")
 	private Departamento departamento;
 	
-	@OneToMany(mappedBy = "pessoaAlocada")
+	@OneToMany(mappedBy = "pessoa")
 	@JsonIgnore
 	private List<Tarefa> tarefas;
 	

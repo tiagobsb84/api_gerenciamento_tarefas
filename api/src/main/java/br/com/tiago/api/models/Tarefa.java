@@ -54,7 +54,7 @@ public class Tarefa implements Serializable {
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "pessoa_id")
-	private Pessoa pessoaAlocada;
+	private Pessoa pessoa;
 	
 	public Tarefa(String titulo, String descricao, Date prazo, Integer duracao, Boolean finalizado) {
 		this.titulo = titulo;

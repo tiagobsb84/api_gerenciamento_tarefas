@@ -1,10 +1,11 @@
-# <div align="center"> API - Gerenciamento de Tarefas </div>
+# <div align="center"> API Rest - Gerenciamento de Tarefas </div>
 
 ## Ferramentas Utilizadas
 * Java (versão 17)
 * SpringBoot (versão 2.7.13)
 * IDE (SpringToolSuite4) o eclipse também pode substituir
 * Banco de Dados (PostgreSQL)
+* PostMan (para fazer os teste na API)
 
  ## Funcionalidades
  * Adicionar um pessoa (post/pessoas)
